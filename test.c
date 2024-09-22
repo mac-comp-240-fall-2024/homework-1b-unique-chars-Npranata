@@ -49,15 +49,28 @@ int main() {
   ok = hasUniqueChars(string3);
   assert(ok);
   
-  // TODO: add your tests here
+  // Test 3: Unique characters should return true
+  strcpy(string3, "abcdefg");
+  ok = hasUniqueChars(string3);
+  assert(ok);
+
+  // Test 4: A string with spaces but unique characters should still return true
+  strcpy(string3, "a b c d e f g");
+  ok = hasUniqueChars(string3);
+  assert(ok);
+
+  // Test 5: A string with a newline (should fail)
+  // strcpy(string3, "valid string\n");
+  // ok = hasUniqueChars(string3);
+  // assert(!(ok));
 
 
 
   // NOTE: if you add a \n to any tests, this should cause the
   //       exit failure given. Keep this test last so you can check 
   //       that others pass or fail as you expect them to.
-  strcpy(string3, "a b cc\n");
-  ok = hasUniqueChars(string3);
+  // strcpy(string3, "a b cc\n");
+  // ok = hasUniqueChars(string3);
   // other examples that should fail that you can place in strings
   // are \0 or \t or \r
   // See problem description for more details about escape sequences

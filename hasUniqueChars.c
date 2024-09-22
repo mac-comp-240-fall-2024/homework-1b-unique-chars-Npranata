@@ -55,8 +55,7 @@ void checkInvalid(char * inputStr) {
 
 
 /*
- * TODO: Replace this code by a good description this function takes in, does and returns.
- * Include the error conditions that cause it to exit with failure.
+ * Function to check if the input string has all unique characters
  */
 bool hasUniqueChars(char * inputStr) {
   // bail out quickly if any invalid characters
@@ -76,7 +75,7 @@ bool hasUniqueChars(char * inputStr) {
   // and checkBitsexcl_amp, for debugging purposes. 
   // It also illustrates how to use the seeBits function for debugging.
   // Printed values should initially be all zeros
-  // TODO: remove or comment out this code when satisfied of function correctness
+
   
   char debug_str_A_z[128];
   strcpy(debug_str_A_z, "checkBitsA_z before: \n");
@@ -85,27 +84,37 @@ bool hasUniqueChars(char * inputStr) {
   char debug_str_excl_amp[128];
   strcpy(debug_str_excl_amp, "checkBitsexcl_amp before: \n");
   seeBits(checkBitsexcl_amp, debug_str_excl_amp);
-  // -------------------------------------------------------------
-
-  // TODO: Declare additional variables you need here
 
   
   for(i = 0; i < strlen(inputStr); i++) {
     nextChar = inputStr[i];
-    // TODO: Add your code here to check nextChar, see if it is a duplicate, and update the checkBits variables
+     if (nextChar == ' ') continue;
+
+    // Check characters in range 65 (A) to 126 (~)
+    if (nextChar >= 65 && nextChar <= 126) {
+        unsigned long bitPosition = (1UL << (nextChar - 65));
+        if (checkBitsA_z & bitPosition) return false; // Duplicate found
+        checkBitsA_z |= bitPosition; // Mark character as seen
+    }
+    // Check characters in range 33 (!) to 64 (@)
+    else if (nextChar >= 33 && nextChar <= 64) {
+        unsigned long bitPosition = (1UL << (nextChar - 33));
+        if (checkBitsexcl_amp & bitPosition) return false; // Duplicate found
+        checkBitsexcl_amp |= bitPosition; // Mark character as seen
+    }
 
     // -------------------------------------------------------------
     // Below this are examples of debugging print statements you could use
     // Move/use as makes sense for you!
     // Modify to work on checkBitsexcl_amp
     // TODO: Comment out or remove when your function works correctly
-    printf("nextchar int value: %d\n", nextChar);
-    char char_str[2] = "\0";
-    char_str[0] = nextChar;
-    strcpy(debug_str_A_z, "nextchar: ");
-    strcat(debug_str_A_z, char_str);
-    strcat(debug_str_A_z,", checkBitsA_z: \n");
-    seeBits(checkBitsA_z, debug_str_A_z);
+    // printf("nextchar int value: %d\n", nextChar);
+    // char char_str[2] = "\0";
+    // char_str[0] = nextChar;
+    // strcpy(debug_str_A_z, "nextchar: ");
+    // strcat(debug_str_A_z, char_str);
+    // strcat(debug_str_A_z,", checkBitsA_z: \n");
+    // seeBits(checkBitsA_z, debug_str_A_z);
     // ------------------------------------------------------------- 
   }
 
